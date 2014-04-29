@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css"/>  
+    <title><!-- Insert your title here --></title>
+    
+    <script>
+      function makeTable() {
+        var newTable = document.createElement("table");
+        newTable.setAttribute('id','t1');
+        document.body.appendChild(newTable);
+        var Table = document.getElementById('t1');
+        for (var i = 0; i*20 < window.innerHeight; i++) {
+        var newRow = document.createElement("tr");
+        newRow.setAttribute("id",i);
+          for (var j =0; j*40 < window.innerWidth; j++) {
+           var newCell = document.createElement("td");
+           var inp = document.createElement("input");
+           newCell.appendChild(inp);
+           inp.setAttribute("id",i+ "_"+j);
+           inp.setAttribute("onBlur", "sum(this)");
+           newRow.appendChild(newCell);
+          }
+          Table.appendChild(newRow);
+        }
+        for (var i1 = 0; i1*20<window.innerHeight;i1++) {
+          var elem = document.getElementById(i1+"_" + "0");
+          elem.setAttribute("placeholder", i1);
+          elem.classList.add('col');
+          elem.setAttribute("disabled","disabled");
+        }
+        i1 = 1;
+        for (var i2 = 65; i2<60+i; i2++) {
+          var elem = document.getElementById("0"+"_" + i1);
+          elem.setAttribute("placeholder", String.fromCharCode(i2));
+          elem.setAttribute("disabled","disabled");
+          elem.classList.add('col');
+          i1++;
+        }
+          var elem = document.getElementById("0"+"_" + "0");
+          elem.setAttribute("placeholder", "");
+        
+      }
+      
+        function sum(target) {
+        var str = document.getElementById(target.id).value;
+        if (String(str).slice(0,1)=== "=") {
+          var s1 = String(parseStr(str));
+          document.getElementById(target.id).value = eval(s1.slice(1,s1.length));
+        }
+      }
+      
+      function parseStr(str) {
+        var obj = {};
+        var k = 0;
+        var ID1 = "";
+        for (var i = 65; i<500; i++) {
+          obj[String.fromCharCode(i)] = "1"
+        }
+        var obj1={};
+        obj1["+"] = "1";
+        obj1["-"] = "1";
+        obj1["*"] = "1";
+        obj1["/"] = "1";
+        
+        obj1["("] = "1";
+        obj1[")"] = "1";
+          i=0;
+          while (i < String(str).length) {
+            if (String(str).charAt(i) in obj1) { i++; }
+        if (String(str).charAt(i) in obj) {
+          k = 0;
+          while (!(String(str).charAt(i+k+1) in obj1) && i+k< String(str).length) k++;
+          ID1 =  String(str).slice(i+1,i+k+1)+ "_" + (String(str).charCodeAt(i) - 64);
+          str = String(str).slice(0,i) + document.getElementById(ID1).value + String(str).slice(i+k+1,String(str).length);
+         i = i+k;
+        }  
+        i++;
+          }
+          return str;
+      }
+         
+         
+    </script>
+    
+</head>
+<body onload="makeTable()">
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+table {
+    border-spacing: 0;
+    cell-spacing: 0;
+    border: 0;
+}
+#t1 td{
+    width: 90px;
+    height: 20px;
+    border: 1px solid #cbcbcb;
+}
+
+#t1 input {
+    width: 90px;
+    height: 20px;
+    border: 0px solid #cbcbcb;
+}
+
+.col {
+    display: block;
+    text-align: center;
+}
+
+input:focus {
+    outline: 3px solid #5184d7;
+    padding: 2px;
+}
+
+input {
+    padding: 2px;
+}
+
+.light {
+    outline: 3px solid #5184d7;
+    padding: 2px;  
+}
+
